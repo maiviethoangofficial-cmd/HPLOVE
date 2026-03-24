@@ -1,0 +1,35 @@
+name: Auto RuboCop Fix
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  rubocop-auto-fix:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1
+
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+        gem install rubocop
+
+    - name: Run RuboCop and auto fix
+      run: |
+        rubocop -A
+
+    - name: Commit & Push fixes
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add .
+        git commit -m "Auto RuboCop fixes" || echo "No changes"
+        git push
