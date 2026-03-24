@@ -1175,112 +1175,115 @@
         updateCount();
     });
 
-    // FAQ TOGGLE
-    function toggleFaq(el) {
-        el.classList.toggle('active');
-        const icon = el.querySelector('.fa-chevron-down');
-        if (icon) icon.style.transform = el.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
-    }
-    const textTarget = document.getElementById("typing-text");
-const dataText = [
-    "Hẹn hò thật - Người thật",
-    "Kết nối nhanh - Không đợi chờ",
-    "Tìm người yêu chuẩn gu HP",
-    "Trải nghiệm AI đỉnh cao"
-];
+     <script>
+        // FAQ TOGGLE
+        function toggleFaq(el) {
+            el.classList.toggle('active');
+            const icon = el.querySelector('.fa-chevron-down');
+            if (icon) icon.style.transform = el.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
 
-let currentText = 0;
-let currentChar = 0;
-let isDeletingText = false;
+        const textTarget = document.getElementById("typing-text");
+        const dataText = [
+            "Hẹn hò thật - Người thật",
+            "Kết nối nhanh - Không đợi chờ",
+            "Tìm người yêu chuẩn gu HP",
+            "Trải nghiệm AI đỉnh cao"
+        ];
 
-function startTyping() {
-    const fullText = dataText[currentText];
-    
-    if (isDeletingText) {
-        textTarget.textContent = fullText.substring(0, currentChar - 1);
-        currentChar--;
-    } else {
-        textTarget.textContent = fullText.substring(0, currentChar + 1);
-        currentChar++;
-    }
+        let currentText = 0;
+        let currentChar = 0;
+        let isDeletingText = false;
 
-    let speed = isDeletingText ? 50 : 150;
+        function startTyping() {
+            if (!textTarget) return;
+            const fullText = dataText[currentText];
+            
+            if (isDeletingText) {
+                textTarget.textContent = fullText.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                textTarget.textContent = fullText.substring(0, currentChar + 1);
+                currentChar++;
+            }
 
-    if (!isDeletingText && currentChar === fullText.length) {
-        speed = 2000; // Dừng lại xem chữ
-        isDeletingText = true;
-    } else if (isDeletingText && currentChar === 0) {
-        isDeletingText = false;
-        currentText = (currentText + 1) % dataText.length;
-        speed = 500;
-    }
+            let speed = isDeletingText ? 50 : 150;
 
-    setTimeout(startTyping, speed);
-}
+            if (!isDeletingText && currentChar === fullText.length) {
+                speed = 2000; // Dừng lại xem chữ
+                isDeletingText = true;
+            } else if (isDeletingText && currentChar === 0) {
+                isDeletingText = false;
+                currentText = (currentText + 1) % dataText.length;
+                speed = 500;
+            }
 
-document.addEventListener("DOMContentLoaded", startTyping);
+            setTimeout(startTyping, speed);
+        }
 
-<div id="music-control" onclick="playMusic()" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; cursor: pointer; background: rgba(255,0,60,0.8); color: white; padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    <i class="fas fa-music" style="margin-right: 8px;"></i> <span id="music-text">Bật Nhạc</span>
-</div>
+        document.addEventListener("DOMContentLoaded", startTyping);
+    </script>
 
-<div id="youtube-audio-player" style="display:none;"></div>
+    <div id="music-control" onclick="playMusic()" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; cursor: pointer; background: rgba(255,0,60,0.8); color: white; padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        <i class="fas fa-music" style="margin-right: 8px;"></i> <span id="music-text">Bật Nhạc</span>
+    </div>
 
-<script>
-  var player;
-  // Tải API của YouTube
-  var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    <div id="youtube-audio-player" style="display:none;"></div>
 
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube-audio-player', {
-      height: '0',
-      width: '0',
-      videoId: 'emSFAf_pl_0', // ID video Ngày Hạnh Phúc Remix
-      playerVars: {
-        'autoplay': 1,
-        'loop': 1,
-        'playlist': 'emSFAf_pl_0',
-        'controls': 0,
-        'showinfo': 0,
-        'modestbranding': 1,
-        'enablejsapi': 1
-      },
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+    <script>
+      var player;
+      // Tải API của YouTube
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-audio-player', {
+          height: '0',
+          width: '0',
+          videoId: 'emSFAf_pl_0', // ID video Ngày Hạnh Phúc Remix
+          playerVars: {
+            'autoplay': 1,
+            'loop': 1,
+            'playlist': 'emSFAf_pl_0',
+            'controls': 0,
+            'showinfo': 0,
+            'modestbranding': 1,
+            'enablejsapi': 1
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
       }
-    });
-  }
 
-  function onPlayerReady(event) {
-    // Thử phát tự động (có thể bị chặn)
-    event.target.playVideo();
-    event.target.setVolume(100);
-  }
+      function onPlayerReady(event) {
+        // Thử phát tự động
+        event.target.playVideo();
+        event.target.setVolume(100);
+      }
 
-  function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING) {
-        document.getElementById('music-text').innerText = "Đang Phát";
-        document.getElementById('music-control').style.background = "rgba(0, 255, 123, 0.8)";
-    }
-  }
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+            document.getElementById('music-text').innerText = "Đang Phát";
+            document.getElementById('music-control').style.background = "rgba(0, 255, 123, 0.8)";
+        }
+      }
 
-  function playMusic() {
-    if (player && player.playVideo) {
-      player.playVideo();
-      player.unMute();
-      player.setVolume(100);
-    }
-  }
+      function playMusic() {
+        if (player && player.playVideo) {
+          player.playVideo();
+          player.unMute();
+          player.setVolume(100);
+        }
+      }
 
-  // Tự động phát khi người dùng click bất cứ đâu trên trang web
-  document.body.addEventListener('click', function() {
-    playMusic();
-  }, { once: true });
-</script>
-
+      // Tự động phát khi người dùng click bất cứ đâu trên trang web
+      document.body.addEventListener('click', function() {
+        playMusic();
+      }, { once: true });
+    </script>
 </body>
 </html>
