@@ -1175,7 +1175,6 @@
         updateCount();
     });
 
-     <script>
         // FAQ TOGGLE
         function toggleFaq(el) {
             el.classList.toggle('active');
@@ -1222,15 +1221,13 @@
         }
 
         document.addEventListener("DOMContentLoaded", startTyping);
-    </script>
-
+    
     <div id="music-control" onclick="playMusic()" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; cursor: pointer; background: rgba(255,0,60,0.8); color: white; padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
         <i class="fas fa-music" style="margin-right: 8px;"></i> <span id="music-text">Bật Nhạc</span>
     </div>
 
     <div id="youtube-audio-player" style="display:none;"></div>
 
-    <script>
       var player;
       // Tải API của YouTube
       var tag = document.createElement('script');
