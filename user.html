@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title>HỒ SƠ HẸN HÒ - HPLOVE AI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --pink: #ff2d55; 
+            --gold: #d4af37;
+            --gold-grad: linear-gradient(135deg, #ffe1a8 0%, #d4af37 50%, #b8860b 100%);
+            --bg-dark: #050505;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        body { margin: 0; font-family: 'Lexend', sans-serif; background: var(--bg-dark); color: #fff; overflow-x: hidden; }
+        .bg-aura { position: fixed; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 50% 0%, #4a152b 0%, #050505 100%); }
+
+        .container { padding: 15px 15px 120px; max-width: 500px; margin: auto; }
+
+        /* 6-PHOTO GRID SYSTEM */
+        .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 160px); gap: 10px; margin-bottom: 25px; }
+        .photo-item { background: var(--glass); border-radius: 20px; overflow: hidden; border: 1px solid rgba(212,175,55,0.2); position: relative; }
+        .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-main { grid-column: span 2; grid-row: span 2; height: 330px; }
+
+        /* PROFILE CONTENT */
+        .profile-info { text-align: center; }
+        .name-age { font-size: 28px; font-weight: 900; margin: 0; letter-spacing: 1px; }
+        .location-tag { color: var(--gold); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: block; margin: 8px 0 20px; }
+
+        /* MATCH CARD AI */
+        .match-card {
+            background: linear-gradient(135deg, rgba(255,45,85,0.15) 0%, rgba(5,5,5,0) 100%);
+            border: 1px dashed var(--pink); border-radius: 25px; padding: 20px;
+            margin-bottom: 25px;
+        }
+        .match-val { font-size: 32px; font-weight: 900; color: var(--pink); display: block; }
+
+        /* INFO SECTION */
+        .info-section { background: var(--glass); border-radius: 30px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); text-align: left; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+        .tag { background: rgba(255,255,255,0.05); border: 1px solid #333; padding: 6px 12px; border-radius: 10px; font-size: 12px; }
+
+        /* FOOTER ACTION BAR */
+        .action-bar { position: fixed; bottom: 25px; left: 5%; width: 90%; display: grid; grid-template-columns: 70px 1fr; gap: 12px; z-index: 100; }
+        .btn { border-radius: 22px; border: none; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; height: 55px; transition: 0.3s; }
+        .btn-back { background: #222; color: #fff; border: 1px solid #333; }
+        .btn-chat { background: var(--gold-grad); color: #000; text-transform: uppercase; font-size: 14px; box-shadow: 0 10px 25px rgba(212,175,55,0.3); }
+        .btn:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+    <div class="bg-aura"></div>
+
+    <div class="container" id="profileContainer">
+        <div class="photo-grid">
+            <div class="photo-item photo-main"><img src="https://via.placeholder.com/400x600" id="img0"></div>
+            <div class="photo-item"><img src="https://via.placeholder.com/200x300" id="img1"></div>
+            <div class="photo-item"><img src="https://via.placeholder.com/200x300" id="img2"></div>
+            <div class="photo-item"><img src="https://via.placeholder.com/200x300" id="img3"></div>
+            <div class="photo-item"><img src="https://via.placeholder.com/200x300" id="img4"></div>
+            <div class="photo-item"><img src="https://via.placeholder.com/200x300" id="img5"></div>
+        </div>
+
+        <div class="profile-info">
+            <h1 class="name-age" id="displayName">Đang tải...</h1>
+            <span class="location-tag" id="displayLocation"><i class="fa-solid fa-location-dot"></i> HẢI PHÒNG</span>
+
+            <div class="match-card">
+                <span style="font-size: 10px; color: #888; font-weight: 700; letter-spacing: 1px;">AI MATCHING RATE</span>
+                <span class="match-val" id="matchRate">--%</span>
+            </div>
+
+            <div class="info-section">
+                <div class="tag-list" id="tagContainer"></div>
+                <p id="displayBio" style="color: #bbb; line-height: 1.6; font-size: 14px; margin: 0;"></p>
+                <div id="compareDetails" style="margin-top: 15px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-bar">
+        <button class="btn btn-back" onclick="window.location.href='home.html'"><i class="fa-solid fa-house"></i></button>
+        <button class="btn btn-chat" id="chatBtn"><i class="fa-solid fa-paper-plane"></i> GỬI LỜI CHÀO</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+
+        // CẤU HÌNH FIREBASE MỚI CỦA BẠN
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLiH69kzYtNpND2Oyf5axSqsvjJ00f0Do",
+            authDomain: "hplove-haiphong.firebaseapp.com",
+            databaseURL: "https://hplove-haiphong-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "hplove-haiphong",
+            storageBucket: "hplove-haiphong.firebasestorage.app",
+            messagingSenderId: "1082693102865",
+            appId: "1:1082693102865:web:9c501a060426da2baab0b0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetId = urlParams.get('id'); // Username của người cần xem
+        const myId = localStorage.getItem("username"); // Username của chính mình
+
+        async function loadData() {
+            if (!targetId) return;
+
+            try {
+                // Lấy thông tin user mục tiêu và thông tin của tôi để so sánh
+                const [targetSnap, mySnap] = await Promise.all([
+                    get(ref(db, 'users/' + targetId)),
+                    get(ref(db, 'users/' + myId))
+                ]);
+
+                if (targetSnap.exists()) {
+                    const data = targetSnap.val();
+                    const myData = mySnap.exists() ? mySnap.val() : null;
+
+                    // Hiển thị tên & bio
+                    document.getElementById('displayName').innerText = `${data.fullName || targetId}`;
+                    document.getElementById('displayBio').innerText = data.bio || "Người dùng này chưa cập nhật giới thiệu cá nhân.";
+                    
+                    // Tính Match Rate ngẫu nhiên từ 80-99% để tạo cảm giác AI
+                    document.getElementById('matchRate').innerText = Math.floor(Math.random() * 20 + 80) + "%";
+
+                    // Hiển thị 6 ảnh
+                    // Ưu tiên mảng 'photos', nếu không có thì lấy 'avatar'
+                    const photoArray = data.photos || [data.avatar || "https://via.placeholder.com/400x600"];
+                    photoArray.forEach((url, i) => {
+                        if (i < 6) document.getElementById(`img${i}`).src = url;
+                    });
+
+                    // Hiển thị Tags (MBTI, Sở thích...)
+                    const tags = [data.mbti, data.loveStyle, data.lifestyle].filter(Boolean);
+                    document.getElementById('tagContainer').innerHTML = tags.map(t => `<div class="tag">${t}</div>`).join('');
+
+                    // Logic so sánh AI đơn giản
+                    if (myData && myData.mbti === data.mbti) {
+                        document.getElementById('compareDetails').innerHTML = `
+                            <div style="background: rgba(0, 176, 155, 0.1); padding: 12px; border-radius: 15px; border-left: 4px solid #00b09b; font-size: 13px;">
+                                <b style="color: #00b09b;">✨ Điểm chung:</b> Cả hai đều có nhóm tính cách <b>${data.mbti}</b>.
+                            </div>`;
+                    }
+
+                    document.getElementById('chatBtn').onclick = () => {
+                        window.location.href = `chat.html?to=${targetId}`;
+                    };
+                }
+            } catch (err) {
+                console.error("Lỗi tải dữ liệu:", err);
+            }
+        }
+
+        window.onload = loadData;
+    </script>
+</body>
+</html>

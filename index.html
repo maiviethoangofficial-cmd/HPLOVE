@@ -1,0 +1,1225 @@
+ <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HP LOVE AI BETA - HẢI PHÒNG KHÔNG LÒNG VÒNG</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+    <style>
+        :root {
+            --primary: #ff003c;
+            --gold: #d4af37;
+            --dark-bg: #020204;
+            --glass: rgba(15, 15, 20, 0.95);
+            --header-h: 70px;
+        }
+
+        /* RESET */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Be Vietnam Pro', sans-serif; }
+        html, body { background: var(--dark-bg); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
+        .no-wrap { white-space: nowrap; display: inline-block; }
+
+        .bg-decor {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(rgba(255, 0, 60, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 0, 60, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed; top: 0; width: 100%; height: var(--header-h);
+            background: var(--glass); backdrop-filter: blur(20px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo { font-size: 20px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+        .logo span { color: var(--primary); }
+        .nav-actions { display: flex; align-items: center; gap: 10px; }
+        .btn { padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-outline { border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 15px rgba(255, 0, 60, 0.3); }
+
+        /* SECTION COMMON */
+        section { padding: 20px 6%; width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden; }
+
+        /* HERO */
+        /* Tìm đoạn này và sửa số 40px thành 0px hoặc 10px */
+.hero { 
+    padding-top: calc(var(--header-h) + 0px); /* Đã giảm từ 40px xuống 0px */
+    min-height: 50vh; /* Giảm từ 80vh xuống 50vh để thu hẹp khoảng đen */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+}
+
+        /* STATS GRID */
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(255,0,60,0.08); padding: 30px 15px; border-radius: 30px; border: 1px dashed var(--primary); gap: 15px; }
+        .stat-card { text-align: center; }
+        .stat-card h3 { font-size: clamp(20px, 5vw, 40px); color: var(--gold); font-weight: 900; }
+        .stat-card p { font-size: 11px; letter-spacing: 1px; opacity: 0.7; }
+
+        /* BENTO GRID */
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; justify-content: center; }
+        .bento-card {
+            background: linear-gradient(145deg, #1a1a2e 0%, #0a0a1a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 25px; padding: 40px 25px; text-align: center; transition: 0.4s ease;
+        }
+        .bento-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 35px rgba(255, 0, 60, 0.15); }
+        .bento-card i {
+            font-size: 45px; margin-bottom: 20px;
+            background: linear-gradient(to bottom, #80d0ff, var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+                 /* GRID HỆ THỐNG */
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-top: 60px;
+    }
+
+    /* CARD CHÍNH */
+    .price-card {
+        --clr: #ff003c; /* Mặc định */
+        position: relative;
+        background: #05050a;
+        border-radius: 40px;
+        padding: 3px;
+        overflow: hidden;
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .price-card:hover {
+        transform: translateY(-20px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* VIỀN CHẠY NÉT ĐỨT */
+    .price-card::before {
+        content: '';
+        position: absolute;
+        width: 160%; height: 160%;
+        top: -30%; left: -30%;
+        background: conic-gradient(transparent, var(--clr), transparent 25%);
+        animation: rotate-border 3s linear infinite;
+    }
+
+    @keyframes rotate-border { 100% { transform: rotate(360deg); } }
+
+    /* LỚP PHỦ NÉT ĐỨT */
+    .price-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 40px;
+        border: 5px dashed #020204; /* Tạo hiệu ứng nét đứt cho viền chạy */
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* NỘI DUNG BÊN TRONG (GLASSMORPHISM) */
+    .price-inner {
+        position: relative;
+        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.95) 100%);
+        border-radius: 37px;
+        padding: 50px 30px;
+        height: 100%;
+        z-index: 2;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    /* ICON TRANG TRÍ ĐỘNG */
+    .main-icon {
+        font-size: 50px;
+        margin-bottom: 25px;
+        display: inline-block;
+        color: var(--clr);
+        filter: drop-shadow(0 0 15px var(--clr));
+        animation: float-icon 3s ease-in-out infinite;
+    }
+
+    @keyframes float-icon {
+        0%, 100% { transform: translateY(0) rotate(0); }
+        50% { transform: translateY(-10px) rotate(10deg); }
+    }
+
+    /* TIÊU ĐỀ GÓI */
+    .price-inner h3 {
+        font-size: 14px;
+        letter-spacing: 5px;
+        color: #fff;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        opacity: 0.8;
+    }
+
+    /* GIÁ TIỀN PHÁT SÁNG */
+    .price-amount {
+        margin-bottom: 35px;
+    }
+
+    .price-amount b {
+        font-size: 55px;
+        font-weight: 900;
+        background: linear-gradient(to bottom, #fff, var(--clr));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: block;
+    }
+
+    /* DANH SÁCH ĐẶC QUYỀN */
+    .price-features {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        margin-bottom: 40px;
+    }
+
+    .price-features li {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: 0.3s;
+    }
+
+    .price-features li:hover {
+        transform: translateX(10px);
+        color: var(--clr);
+    }
+
+    .price-features li i {
+        color: var(--clr);
+        font-size: 12px;
+        filter: drop-shadow(0 0 5px var(--clr));
+    }
+
+    /* NÚT BẤM CÔNG NGHỆ (XỊN) */
+    .btn-upgrade-tech {
+        background: transparent;
+        border: 1px solid var(--clr);
+        color: #fff;
+        padding: 18px 25px;
+        border-radius: 100px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: block;
+        transition: 0.4s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-upgrade-tech:hover {
+        background: var(--clr);
+        box-shadow: 0 0 40px var(--clr);
+        color: #000;
+        transform: scale(1.05);
+    }
+
+    /* HIỆU ỨNG QUÉT SÁNG NÚT BẤM */
+    .btn-upgrade-tech::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        transition: 0.6s;
+    }
+
+    .btn-upgrade-tech:hover::before {
+        left: 100%;
+    }
+
+    /* MÀU SẮC RIÊNG */
+    .card-silver { --clr: #8e9eab; }
+    .card-gold { --clr: #d4af37; }
+    .card-diamond { --clr: #ff003c; }
+
+    @media (max-width: 992px) {
+        .pricing-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+
+        /* FAQ - CENTERED */
+        #faq { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: rgba(255,255,255,0.02); margin-bottom: 12px; border-radius: 15px; padding: 22px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); text-align: left; }
+        .faq-item.active { border-color: var(--primary); background: rgba(255, 0, 60, 0.05); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: 0.3s; opacity: 0; font-size: 14px; color: #aaa; }
+        .faq-item.active .faq-answer { max-height: 200px; padding-top: 15px; opacity: 1; }
+
+        /* FOOTER - CENTERED */
+        footer { 
+            padding: 80px 6% 50px; 
+            border-top: 1px solid rgba(255,255,255,0.05); 
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .footer-socials { margin: 25px 0; display: flex; gap: 25px; }
+        .footer-socials i { font-size: 22px; opacity: 0.6; transition: 0.3s; cursor: pointer; }
+        .footer-socials i:hover { opacity: 1; color: var(--primary); }
+
+        @media (max-width: 992px) {
+            .bento-grid, .pricing-grid { grid-template-columns: 1fr; }
+            .price-card.featured { transform: scale(1); }
+        }
+                       /* KHUNG CHỨA CHÍNH - ÉP CĂN GIỮA */
+    .hero-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;     /* Căn giữa theo chiều ngang */
+        justify-content: center;    /* Căn giữa theo chiều dọc */
+        text-align: center;
+        width: 100%;
+        min-height: 85vh;        /* Chiều cao gần full màn hình */
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+       .btn-connect-touch {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        text-decoration: none;
+        text-transform: uppercase;
+        
+        /* Font mảnh và giãn cách rộng tạo vẻ cao cấp */
+        font-weight: 300;
+        font-size: clamp(14px, 3vw, 18px);
+        letter-spacing: 10px; /* Cực kỳ quan trọng để chữ "sang" hơn */
+        
+        /* Màu trắng mờ, hòa hợp với nền tối */
+        color: rgba(255, 255, 255, 0.7);
+        position: relative;
+        transition: all 0.5s ease;
+        cursor: pointer;
+    }
+
+    /* Hiệu ứng tia sáng quét ngang chữ */
+    .btn-connect-touch::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.4), transparent);
+        transition: 0.5s;
+    }
+
+    /* Hiệu ứng khi Hover hoặc Chạm */
+        /* KHUNG CHỨA TỔNG THỂ */
+    .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    min-height: 40vh; /* Chỉnh từ 85vh xuống 40vh để kéo mọi thứ lên trên */
+    padding: 10px;    /* Giảm padding từ 20px xuống 10px */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+    /* TIÊU ĐỀ H1 */
+    .hero-content h1 {
+        margin: 0;
+        padding: 40px 0; /* Tạo không gian cực rộng cho dấu phía trên và dưới */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: visible;
+    }
+
+    /* CHỮ MỘT CHẠM: PHÔNG CHUẨN - DẤU RÕ */
+    .top-text {
+        /* Dùng font hệ thống chuẩn tiếng Việt hoặc Be Vietnam Pro */
+        font-family: 'Be Vietnam Pro', 'Inter', sans-serif; 
+        font-size: clamp(55px, 15vw, 150px);
+        font-weight: 900;
+        
+        /* Tăng line-height để dấu nặng (.) và dấu mũ (Ô) không bị dính vào nhau */
+        line-height: 1.3; 
+        
+        text-transform: uppercase;
+        white-space: nowrap;
+        display: block;
+        
+        /* Hiệu ứng Gradient mượt mà */
+        background: linear-gradient(to bottom, #ffffff 30%, #ff003c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        
+        /* Đổ bóng Neon để "cứu" những phần dấu bị mờ */
+        filter: drop-shadow(0 0 15px rgba(255, 0, 60, 0.6));
+        
+        margin: 0;
+        padding: 0 20px;
+    }
+    
+        /* KHUNG CHỨA VÂN TAY */
+    .touch-area {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        margin: 50px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background: radial-gradient(circle, rgba(255, 0, 60, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    /* ICON VÂN TAY CHÍNH */
+    .fingerprint-icon {
+        font-size: 100px;
+        color: var(--primary);
+        filter: drop-shadow(0 0 15px var(--primary));
+        z-index: 5;
+        animation: finger-glow 2s infinite ease-in-out;
+    }
+
+    /* TIA QUÉT LASER CHẠY DỌC (HÀNG XỊN) */
+    .touch-area::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 2px;
+        background: var(--primary);
+        box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+        z-index: 10;
+        animation: laser-scan 3s linear infinite;
+    }
+
+    /* VÒNG TRÒN SÓNG LAN TỎA */
+    .touch-area::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        animation: ripple-out 2.5s linear infinite;
+        opacity: 0;
+    }
+
+    /* KEYFRAMES CHO CHUYỂN ĐỘNG */
+    
+    /* 1. Tia Laser quét lên xuống */
+    @keyframes laser-scan {
+        0%, 100% { top: 20%; opacity: 0; }
+        10% { opacity: 1; }
+        50% { top: 80%; opacity: 1; }
+        90% { opacity: 1; }
+        95% { top: 85%; opacity: 0; }
+    }
+
+    /* 2. Sóng tỏa ra ngoài */
+    @keyframes ripple-out {
+        0% { transform: scale(0.8); opacity: 0; }
+        50% { opacity: 0.5; }
+        100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    /* 3. Vân tay nhấp nháy theo nhịp tim */
+    @keyframes finger-glow {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px var(--primary)); }
+        50% { transform: scale(1.05); filter: drop-shadow(0 0 30px var(--primary)); }
+    }
+
+    /* HIỆU ỨNG KHI CHẠM (ACTIVE) */
+    .touch-area:active .fingerprint-icon {
+        transform: scale(0.9);
+        color: #fff;
+        filter: drop-shadow(0 0 40px var(--primary));
+    }
+
+    /* CHỮ CÓ NGƯỜI YÊU: LUI XUỐNG DƯỚI */
+    .main-text {
+        font-size: clamp(20px, 5vw, 35px);
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.9);
+        letter-spacing: 6px;
+        
+        /* Khoảng cách lui xuống so với chữ Một Chạm */
+        margin-top: 20px; 
+        
+        display: block;
+        text-transform: uppercase;
+        text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+    }
+
+  /* --- PHẦN CSS CŨ CÒN LẠI --- */
+        .stage-3d { 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: flex-end; 
+    height: 600px; 
+    margin-top: 150px; /* Tăng số này lên để đẩy MC xuống dưới, không chạm vào chữ HP LOVE nữa */
+    width: 100%; 
+    position: relative; 
+}
+        .actor { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; position: relative; }
+        .male-side { transform: rotateY(20deg) translateX(40px); }
+        .female-side { transform: rotateY(-20deg) translateX(-40px); }
+        .lead-text { position: absolute; width: 140px; text-align: center; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; animation: text-float 3s infinite; }
+        .top-lead { top: -55px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 4px; }
+        .bottom-lead { bottom: -65px; color: #aaa; text-transform: none; font-style: italic; font-weight: 400; }
+        .bottom-lead b { color: #fff; font-size: 11px; display: block; }
+        .blue-glow { color: #00d2ff; text-shadow: 0 0 10px #00d2ff; }
+        .pink-glow { color: #ff007a; text-shadow: 0 0 10px #ff007a; }
+        @keyframes text-float { 0%, 100% { transform: translateY(0); opacity: 0.7; } 50% { transform: translateY(-5px); opacity: 1; } }
+        .avatar-box { position: relative; width: 120px; height: 120px; margin-bottom: 15px; }
+        .hex-vibe { width: 100%; height: 100%; background: rgba(255, 255, 255, 0.05); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .vn-pic-main { width: 100%; height: 100%; object-fit: cover; }
+        .blue-border { border: 2px solid #00d2ff; color: #00d2ff; }
+        .pink-border { border: 2px solid #ff007a; color: #ff007a; }
+        .mc-center { 
+    width: 430px;           /* Kích thước này giúp MC trông cao ráo mà không quá thô */
+    z-index: 100; 
+    transform: translateZ(100px); 
+    margin: 0 -40px;        /* Giữ khoảng cách an toàn với Nam và Nữ */
+}
+       /* Tùy chỉnh khung lời thoại cho MC khi MC to lên */
+.mc-hologram-intro { 
+    position: absolute; 
+    top: -120px;             /* Khoảng cách này sẽ giúp khung chữ nằm ngay trên đầu MC Phương */
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 300px; 
+    background: rgba(0, 0, 0, 0.85); /* Tăng độ đậm nền một chút cho dễ đọc chữ trắng */
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(212, 175, 55, 0.6); 
+    border-radius: 12px; 
+    padding: 12px 15px; 
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); 
+    animation: float-hologram 3s infinite; 
+    z-index: 210; 
+}
+
+/* CHỮ IN CHÌM SAU LƯNG MC */
+.mc-background-text {
+    position: absolute;
+    top: 55%;               /* Vị trí ngang tầm lưng MC */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(60px, 12vw, 120px); /* Chữ cực đại */
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.04); /* Độ mờ cực thấp (chỉ 4%) để nhìn ẩn hiện */
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: 15px;    /* Giãn cách chữ rộng cho sang */
+    z-index: 50;            /* Nằm dưới MC (z-index của MC là 100) */
+    pointer-events: none;    /* Không cản trở việc click vào MC */
+    
+    /* Hiệu ứng viền chữ (Stroke) thay vì đổ màu đặc để nhìn xịn hơn */
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+    filter: blur(2px);       /* Làm mờ nhẹ để tạo hiệu ứng xa xăm */
+    
+    user-select: none;
+}
+
+        .dynamic-tab { padding: 6px 20px; border-radius: 50px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); font-size: 10px; font-weight: 900; letter-spacing: 1px; z-index: 105; }
+        .blue-tab { color: #00d2ff; border-color: #00d2ff; }
+        .pink-tab { color: #ff007a; border-color: #ff007a; }
+        .gold-tab { color: #d4af37; border-color: #d4af37; text-shadow: 0 0 10px #d4af37; margin-top: 5px; }
+        .ai-analytics { display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 100px; padding: 12px 30px; background: rgba(255, 255, 255, 0.03); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.1); backdrop-filter: blur(5px); }
+        .analyt-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .analyt-item .label { font-size: 8px; color: #666; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+        .analyt-item .value { font-size: 14px; font-weight: 900; font-family: monospace; }
+        .analyt-divider { width: 1px; height: 25px; background: linear-gradient(to bottom, transparent, #d4af37, transparent); opacity: 0.3; }
+        .audience-row { display: flex; justify-content: center; align-items: flex-end; gap: 12px; margin-top: 30px; width: 100%; max-width: 950px; perspective: 1000px; }
+        .vip-chair { width: 65px; display: flex; flex-direction: column; align-items: center; position: relative; transition: 0.3s; cursor: pointer; }
+        .armrest { position: absolute; width: 10px; height: 35px; background: #300000; bottom: 12px; border-radius: 4px; }
+        .armrest.left { left: -5px; } .armrest.right { right: -5px; }
+        .chair-back { width: 100%; height: 65px; background: linear-gradient(145deg, #8b0000, #4a0000); border-radius: 12px 12px 5px 5px; box-shadow: inset 0 5px 10px rgba(255,255,255,0.1), 0 5px 15px rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.3); }
+        .chair-back img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+        .chair-seat { width: 75px; height: 22px; background: linear-gradient(to bottom, #7a0000, #300000); border-radius: 5px 5px 15px 15px; margin-top: -5px; z-index: 2; box-shadow: 0 8px 15px rgba(0,0,0,0.6); border-bottom: 3px solid #d4af37; }
+        .user-label { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 7px; font-weight: 900; padding: 2px 0; }
+        .control-panel { display: flex; justify-content: center; gap: 15px; margin-top: 40px; width: 100%; padding: 0 20px; }
+        .btn-3d { flex: 1; max-width: 180px; height: 60px; border-radius: 12px; font-weight: 900; font-size: 11px; text-transform: uppercase; border: none; cursor: pointer; transition: 0.2s; }
+        .btn-3d.primary { background: linear-gradient(135deg, #d4af37, #aa8928); color: #000; box-shadow: 0 5px 0 #6e5614; }
+        .btn-3d.secondary { background: #1a1a1a; color: #d4af37; border: 1px solid #d4af37; box-shadow: 0 5px 0 #000; }
+
+        @media (max-width: 768px) {
+            .stage-3d { transform: scale(0.6); height: 350px; }
+            .audience-row { transform: scale(0.8); gap: 8px; }
+            .vip-chair { width: 55px; }
+        }
+
+        /* --- PHẦN TIÊU ĐỀ XỊN XÒ --- */
+.header-wrapper {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px; /* Giảm từ 40px xuống 0px */
+    position: relative;
+    z-index: 200;
+}
+
+.hp-love-title {
+    font-family: 'Be Vietnam Pro', sans-serif; /* Sử dụng phông xịn bạn đã có */
+    font-size: clamp(45px, 10vw, 85px);       /* Tự động to theo màn hình (Cực to) */
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #fff;
+    margin: 0;
+    line-height: 1.1;
+    
+    /* Hiệu ứng tỏa sáng Neon xịn */
+    text-shadow: 0 0 10px rgba(255,255,255,0.8), 
+                 0 0 20px rgba(255, 0, 60, 0.5), 
+                 0 0 40px rgba(255, 0, 60, 0.3);
+                 
+    /* Thêm hiệu ứng động nhịp tim */
+    animation: pulse-neon 2s infinite alternate; 
+}
+
+.studio-3d-tag {
+    color: var(--gold);              /* Dùng màu vàng Gold xịn */
+    font-weight: 700;               /* Làm đậm chữ hơn một chút */
+    font-size: 0.55em;
+    letter-spacing: 15px;
+    display: block;
+    margin-top: -8px;
+    text-transform: uppercase;
+    
+    /* Tạo hiệu ứng neon cho màu vàng */
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+}
+
+/* Khung bao quanh dòng Live */
+.live-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding: 8px 25px;
+    background: rgba(255, 255, 255, 0.03); /* Nền mờ cực nhẹ */
+    border-radius: 50px;
+    border: 1px solid rgba(212, 175, 55, 0.2); /* Viền vàng gold mờ */
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Chữ LIVE MATCHING có chấm đỏ nhấp nháy */
+.live-tag {
+    color: #ff003c;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.live-tag::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #ff003c;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff003c;
+    animation: blink 1s infinite; /* Chấm đỏ nhấp nháy */
+}
+
+/* Tên bài hát Gradient và trượt nhẹ */
+.song-name {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: italic;
+    background: linear-gradient(90deg, #fff, #d4af37, #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-text 3s linear infinite; /* Chữ lấp lánh vàng gold */
+}
+
+/* HIỆU ỨNG ANIMATION */
+@keyframes blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.8); }
+}
+
+@keyframes shine-text {
+    to { background-position: 200% center; }
+}
+
+
+/* Hiệu ứng chữ đập nhẹ cho sinh động */
+@keyframes title-fade {
+    from { opacity: 0.8; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.02); }
+}
+
+/* QUAN TRỌNG: Đẩy sân khấu xuống để không chạm chữ */
+.stage-3d {
+    margin-top: 140px !important; /* Tăng số này nếu vẫn thấy chạm MC */
+}
+     .ai-analytics {
+    transform: translateY(-40px); /* Dùng số âm để kéo ngược bảng chỉ số lên phía MC */
+}
+
+@keyframes pulse-neon {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255, 0, 60, 0.5);
+    }
+    100% {
+        transform: scale(1.05); /* To lên nhẹ */
+        text-shadow: 0 0 15px rgba(255,255,255,1), 0 0 35px rgba(255, 0, 60, 0.8);
+    }
+}
+
+/* Khung chứa nội dung */
+.brand-intro-box {
+    max-width: 850px;
+    margin: 0 auto 50px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    /* Hiệu ứng nền mờ nhẹ để tách biệt với nền đen */
+    background: radial-gradient(circle at center, rgba(255, 0, 60, 0.05) 0%, transparent 70%);
+}
+
+/* Dòng tiêu đề phụ: CÔNG NGHỆ TOP 1 */
+.tech-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid var(--primary);
+    border-radius: 50px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-weight: 800;
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
+}
+
+/* Đoạn văn chính */
+.main-description {
+    font-size: 16px;
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Nhấn mạnh chữ ĐẦU TIÊN và TOP 1 */
+.highlight-gold {
+    color: var(--gold);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.highlight-red {
+    color: #fff;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 2px;
+}
+
+/* CONTAINER BAO QUANH SLOGAN */
+.slogan-container {
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;   /* Khoảng cách với nội dung phía trên */
+    margin-bottom: 30px; /* Khoảng cách với phần MC phía dưới */
+    perspective: 1000px; /* Tạo chiều sâu cho chuyển động */
+}
+
+/* CHỮ HẢI PHÒNG LONG TRANH HỔ ĐẤU */
+.slogan-top {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(24px, 6vw, 42px); /* Tự động to theo màn hình */
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 5px;    /* Giãn cách rộng tạo vẻ sang trọng */
+    margin: 0 0 10px 0;     /* Giảm bớt khoảng cách dưới */
+    line-height: 1.1;
+    
+    /* Hiệu ứng tỏa sáng Neon vàng gold nhẹ */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 
+                 0 0 20px rgba(212, 175, 55, 0.3);
+                 
+    /* Chuyển động nhịp tim nhẹ */
+    animation: slogan-pulse 3s infinite alternate; 
+}
+
+/* CHỮ DẶN LÒNG MÌNH KHÔNG ĐẦU GẤU ĐƯỢC ĐÂU */
+.slogan-bottom {
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 300;       /* Làm mảnh chữ để đối lập với HP LOVE */
+    color: rgba(255, 255, 255, 0.6); /* Làm mờ để tạo chiều sâu */
+    letter-spacing: 12px;    /* Giãn cách cực rộng cho sang */
+    display: block;
+    margin-top: -10px;      /* Kéo nó sát lên trên một chút */
+    
+    /* Hiệu ứng neon mờ cho màu đỏ AI của bạn */
+    text-shadow: 0 0 5px rgba(255, 0, 60, 0.4); 
+}
+
+/* ANIMATION: CHỮ ĐẬP NHẸ NHÀNG */
+@keyframes slogan-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.02); opacity: 1; text-shadow: 0 0 15px rgba(255,255,255,0.7); }
+}
+
+       </style>
+    </head>
+<body>
+
+<div class="bg-decor"></div>
+
+<header>
+    <div class="logo">HP LOVE <span>AI</span></div>
+    <div class="nav-actions">
+        <a href="#" class="btn btn-outline"><i class="fa-solid fa-crown"></i> <span>VIP Club</span></a>
+        <a href="register.html" class="btn btn-primary">THAM GIA NGAY</a>
+    </div>
+</header>
+
+<main>
+    <section class="hero" data-aos="zoom-in">
+        <div class="hero-inner">
+            <p style="color: var(--gold); letter-spacing: 4px; font-weight: 700; margin-bottom: 15px; text-transform: uppercase;">Hải Phòng • Việt Nam</p>
+            <h1>ĐẤT CẢNG <br><span style="color: var(--primary);">KHÔNG LÒNG VÒNG</span></h1>
+            <div class="brand-intro-box">
+    <span class="tech-badge">Công nghệ Top 1 Hải Phòng</span>
+    
+    <p class="main-description">
+        <b style="color: #fff; font-size: 18px; letter-spacing: 2px;">HP LOVE AI</b> — 
+        Định nghĩa lại khái niệm kết nối số. Tự hào là nền tảng hẹn hò & ghép đôi 
+        <span class="highlight-red">định danh đầu tiên</span> tại Việt Nam, 
+        chúng tôi mang đến hệ sinh thái <span class="highlight-gold">Công nghệ hàng đầu Đất Cảng</span>. 
+        Bằng việc ứng dụng trí tuệ nhân tạo (AI) đa tầng, HP Love AI kiến tạo không gian kết nối 
+        an toàn và minh bạch tuyệt đối, viết tiếp câu chuyện hạnh phúc đích thực cho 
+        những người con ưu tú của <b style="color: #fff;">Hải Phòng</b>.
+    </p>
+</div>
+     <div class="slogan-container">
+    <h2 class="slogan-top">Hải Phòng Long Tranh Hổ Đấu</h2>
+    <span class="slogan-bottom">
+        <i class="fas fa-heart" style="font-size: 12px; color: var(--primary); margin-right: 8px;"></i> Dặn Lòng Mình Không Đầu Gấu Được Đâu
+    </span>
+</div>
+
+            <a href="register.html" class="btn btn-primary" style="padding: 18px 45px; margin: 0 auto; border-radius: 100px;">BẮT ĐẦU MIỄN PHÍ</a>
+        </div>
+    </section>
+
+<section class="hero-container" id="home">
+<div class="hero-content" data-aos="fade-down" data-aos-duration="1000">
+    <h1>
+        <span class="top-text">MỘT CHẠM</span>
+    </h1>
+        
+        <span class="main-text">CÓ NGƯỜI YÊU</span>
+    </h1>
+    
+    <div class="touch-area" id="fingerprintScanner">
+    <i class="fa-solid fa-fingerprint fingerprint-icon"></i>
+</div>
+
+<div class="scan-status" style="text-align:center; color: var(--primary); letter-spacing: 5px; font-size: 12px; margin-top: -20px; font-weight: bold;">
+    SCANNING ID...
+</div>
+
+</div>
+
+        <a href="#pricing" class="btn-connect-touch">
+            CHẠM ĐỂ KẾT NỐI
+        </a>
+
+        <div class="typing-container" style="margin-top: 30px;">
+            <span id="typing-text" style="color: var(--gold); font-size: 14px; opacity: 0.8;"></span>
+        </div>
+
+        <p class="hero-desc" style="margin-top: 20px; border: none; background: none; box-shadow: none;">
+            Hệ thống AI quét định danh <b>FaceID</b> tại Hải Phòng. <br>
+            Tìm thấy "nửa kia" chuẩn gu chỉ với một lần xác thực vân tay ảo.
+        </p>
+    </div>
+</section>
+
+    <section style="padding-top: 0;">
+        <div class="stats" data-aos="fade-up">
+            <div class="stat-card">
+                <h3 class="counter" data-target="50">0</h3>
+                <p>THÀNH VIÊN</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="counter" data-target="12">0</h3>
+                <p>CẶP ĐÔI</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="counter" data-target="99">0</h3>
+                <p>% NGƯỜI THẬT</p>
+            </div>
+        </div>
+    </section>
+
+<section id="pricing">
+    <div style="text-align: center; margin-bottom: 60px;">
+        <h2 style="font-size: clamp(30px, 5vw, 45px); font-weight: 900; letter-spacing: -2px;">
+            HỆ THỐNG <span style="color: var(--primary);">ĐẶC QUYỀN</span>
+        </h2>
+        <p style="opacity: 0.5; font-size: 14px; letter-spacing: 3px; text-transform: uppercase;">Nâng cấp để kết nối không giới hạn</p>
+    </div>
+
+    <div class="pricing-grid">
+        <div class="price-card card-silver" data-aos="fade-up">
+            <div class="price-inner">
+                <div class="main-icon"><i class="fa-solid fa-paper-plane"></i></div>
+                <h3>Silver Edition</h3>
+                <div class="price-amount"><b>0đ</b></div>
+                <ul class="price-features">
+                    <li><i class="fa-solid fa-circle-check"></i> 50 Lượt quẹt/ngày</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Tìm quanh Hải Phòng</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Hỗ trợ cơ bản 24/7</li>
+                </ul>
+                <a href="#" class="btn-upgrade-tech">Dùng Miễn Phí</a>
+            </div>
+        </div>
+
+        <div class="price-card card-gold" data-aos="fade-up" data-aos-delay="100">
+            <div class="price-inner">
+                <div style="position: absolute; top: 20px; right: 20px; color: var(--clr); font-size: 10px; font-weight: 900; letter-spacing: 2px;">POPULAR</div>
+                <div class="main-icon"><i class="fa-solid fa-crown"></i></div>
+                <h3>Gold Member</h3>
+                <div class="price-amount"><b>199k</b><span style="font-size: 14px; opacity: 0.5;">/tháng</span></div>
+                <ul class="price-features">
+                    <li><i class="fa-solid fa-fire"></i> Không giới hạn quẹt</li>
+                    <li><i class="fa-solid fa-eye"></i> Xem ai đã thích bạn</li>
+                    <li><i class="fa-solid fa-certificate"></i> Tích xanh định danh AI</li>
+                    <li><i class="fa-solid fa-message"></i> Nhắn tin chờ trực tiếp</li>
+                </ul>
+                <a href="#" class="btn-upgrade-tech">Nâng Cấp Ngay</a>
+            </div>
+        </div>
+
+        <div class="price-card card-diamond" data-aos="fade-up" data-aos-delay="200">
+            <div class="price-inner">
+                <div class="main-icon"><i class="fa-solid fa-gem"></i></div>
+                <h3>Diamond Elite</h3>
+                <div class="price-amount"><b>499k</b><span style="font-size: 14px; opacity: 0.5;">/tháng</span></div>
+               <ul class="price-features" style="list-style: none; padding: 0; margin: 30px 0;">
+    <li>
+        <i class="fas fa-star glow-icon" style="color: #ff003c;"></i>
+        <span style="color: #ff003c; font-weight: bold;">Ưu tiên hiển thị số 1</span>
+    </li>
+
+    <li>
+        <i class="fas fa-robot" style="color: #ff003c;"></i>
+        <span style="color: rgba(255,255,255,0.9);">Robot HPLOVE AI tìm người hộ</span>
+    </li>
+
+    <li>
+        <i class="fas fa-ticket-alt glow-icon" style="color: #ff003c;"></i>
+        <span style="color: rgba(255,255,255,0.9);">Vé Offline VIP đặc biệt</span>
+    </li>
+
+    <li>
+        <i class="fas fa-shield-alt" style="color: #ff003c;"></i>
+        <span style="color: rgba(255,255,255,0.9);">Bảo mật hồ sơ tuyệt đối</span>
+    </li>
+</ul>
+
+<a href="#" class="btn-upgrade-new card-neon" style="border: 2px solid #ff003c; background: transparent; border-radius: 100px; padding: 18px; color: #fff; text-decoration: none; font-weight: 900; display: block; text-align: center; transition: 0.4s;">
+    SỞ HỮU NGAY
+</a>
+
+                </ul>
+               
+            </div>
+        </div>
+    </div>
+</section>
+
+      <section id="faq-section">
+    <div style="text-align: center; margin-bottom: 50px;">
+        <h2 style="font-weight: 900; letter-spacing: -1px;">HỎI ĐÁP <span style="color: var(--primary);">AI</span></h2>
+        <p style="opacity: 0.5;">Giải đáp mọi thắc mắc về hệ thống hẹn hò thông minh</p>
+    </div>
+
+    <div id="faq">
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-content">
+                <div class="faq-question">
+                    <span>Làm sao để biết đối phương là người thật?</span> 
+                    <i class="fa-solid fa-robot ani-robot" style="color: var(--primary);"></i>
+                </div>
+                <div class="faq-answer">
+                    Hệ thống <b>HP LOVE AI</b> áp dụng quy trình xác minh 3 lớp nghiêm ngặt. Đầu tiên, người dùng phải quét <b>Face ID</b> trực tiếp để đối chiếu với ảnh hồ sơ. 
+                    <br><br>
+                    Tiếp theo, thuật toán AI sẽ phân tích cử động sinh học để loại bỏ hoàn toàn các hình ảnh giả mạo hoặc deepfake. Cuối cùng, đội ngũ quản trị viên sẽ phê duyệt thủ công từng hồ sơ tại Hải Phòng. <b>Chỉ những tài khoản có tích xanh mới được phép tương tác sâu</b>, đảm bảo bạn luôn trò chuyện với người thật 100%.
+                    <div class="faq-footer">
+                        <i class="fa-solid fa-circle-check"></i> An tâm kết nối
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-content">
+                <div class="faq-question">
+                    <span>Ứng dụng có bảo mật thông tin không?</span> 
+                    <i class="fa-solid fa-shield-halved ani-shield" style="color: var(--primary);"></i>
+                </div>
+                <div class="faq-answer">
+                    Chúng tôi đặt sự riêng tư của bạn lên hàng đầu. Mọi thông tin cá nhân đều được <b>mã hóa đầu cuối (AES-256)</b> - tiêu chuẩn bảo mật của các ngân hàng quốc tế. 
+                    <br><br>
+                    Hệ thống cho phép bạn tùy chỉnh quyền riêng tư: ẩn hồ sơ với người quen, chặn chụp màn hình tin nhắn và tự động xóa lịch sử trò chuyện sau một khoảng thời gian. <b>Dữ liệu của bạn sẽ không bao giờ được chia sẻ cho bên thứ ba</b> dưới bất kỳ hình thức nào.
+                    <div class="faq-footer">
+                        <i class="fa-solid fa-lock"></i> Bảo mật đa tầng
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-content">
+                <div class="faq-question">
+                    <span>Tại sao tôi nên sở hữu gói Diamond Elite?</span> 
+                    <i class="fa-solid fa-gem ani-gem" style="color: var(--gold);"></i>
+                </div>
+                <div class="faq-answer">
+                    <b>Diamond Elite</b> không chỉ là một gói hội viên, đó là một tấm vé gia nhập cộng đồng tinh hoa. Bạn sẽ nhận được:
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li><b>Matching Ưu Tiên:</b> Thuật toán đẩy hồ sơ của bạn lên top đầu khu vực Hải Phòng.</li>
+                        <li><b>Quản gia AI:</b> Tự động lọc và gợi ý những đối tượng khớp tới 99% sở thích của bạn.</li>
+                        <li><b>Sự kiện Offline VIP:</b> Đặc quyền tham gia các buổi tiệc du thuyền hoặc Gala Dinner kín tại Cát Bà, Đồ Sơn.</li>
+                    </ul>
+                    <div class="faq-footer">
+                        <i class="fa-solid fa-star"></i> Đẳng cấp thượng lưu
+                    </div>
+                </div>
+    </div>
+</section>
+
+<section id="hpok-studio-final">
+    <div class="spotlight"></div>
+
+    <div class="header-wrapper">
+    <h1 class="hp-love-title">
+        HP LOVE <span class="studio-3d-tag">STUDIO 3D</span>
+    </h1>
+    <div class="live-status">
+        <span>● LIVE MATCHING</span>
+        <span>♫ Ngày Hạnh Phúc - Bằng Cường</span>
+    </div>
+</div>
+
+        <div class="stage-3d">
+            <div class="actor male-side">
+                <div class="lead-text top-lead blue-glow"><i class="fa-solid fa-satellite-dish"></i> Đang quét tần số...</div>
+                <div class="avatar-box">
+                    <div class="hex-vibe blue-border">
+                        <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200" class="vn-pic-main">
+                    </div>
+                </div>
+                <div class="dynamic-tab blue-tab">BẠN&nbsp;NAM</div>
+                <div class="lead-text bottom-lead">Tìm kiếm mảnh ghép <br><b>Bản lĩnh & Ga-lăng</b></div>
+            </div>
+
+            <div class="actor mc-center">
+            
+                <div class="mc-hologram-intro">
+                    <p>Chào mừng bạn! Phương là AI kết duyên từ <b>HP Love</b>. Hãy để Phương tìm cho bạn một nửa hoàn hảo tại Hải Phòng.</p>
+                </div>
+                <img src="https://drive.google.com/thumbnail?id=1JpaiZVgVclzSF4WtVzjEQVaW4A__6YX3&sz=w1000" class="mc-img">
+                <div class="dynamic-tab gold-tab">MC&nbsp;PHƯƠNG</div>
+            </div>
+
+            <div class="actor female-side">
+                <div class="lead-text top-lead pink-glow"><i class="fa-solid fa-heart-pulse"></i> Phân tích độ hợp...</div>
+                <div class="avatar-box">
+                    <div class="hex-vibe pink-border">
+                        <img src="https://images.pexels.com/photos/1382731/pexels-photo-1382731.jpeg?auto=compress&cs=tinysrgb&w=200" class="vn-pic-main">
+                    </div>
+                </div>
+                <div class="dynamic-tab pink-tab">BẠN&nbsp;NỮ</div>
+                <div class="lead-text bottom-lead">Mở khóa trái tim <br><b>Nhẹ nhàng & Tinh tế</b></div>
+            </div>
+        </div>
+
+        <div class="ai-analytics">
+            <div class="analyt-item"><span class="label">Tương thích</span><span class="value blue-glow">98%</span></div>
+            <div class="analyt-divider"></div>
+            <div class="analyt-item"><span class="label">Nhịp tim</span><span class="value pink-glow">115 BPM</span></div>
+            <div class="analyt-divider"></div>
+            <div class="analyt-item"><span class="label">Trạng thái</span><span class="value gold-glow">ĐANG KẾT NỐI...</span></div>
+        </div>
+
+        <div class="audience-row">
+            <div class="vip-chair">
+                <div class="chair-number">1</div>
+                <div class="armrest left"></div><div class="armrest right"></div>
+                <div class="chair-back"><img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=100"><div class="user-label">Anh Ba</div></div>
+                <div class="chair-seat"></div>
+                <div class="status-bar status-busy"></div>
+            </div>
+            <div class="vip-chair">
+                <div class="chair-number">2</div>
+                <div class="armrest left"></div><div class="armrest right"></div>
+                <div class="chair-back"><img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100"><div class="user-label">Lan Anh</div></div>
+                <div class="chair-seat"></div>
+                <div class="status-bar status-busy"></div>
+            </div>
+            <div class="vip-chair">
+                <div class="chair-number">3</div>
+                <div class="armrest left"></div><div class="armrest right"></div>
+                <div class="chair-back"><div style="color:#d4af37;font-size:10px;">TRỐNG</div><div class="user-label">Mời vào</div></div>
+                <div class="chair-seat"></div>
+                <div class="status-bar status-available"></div>
+            </div>
+            <div class="vip-chair">
+                <div class="chair-number">4</div>
+                <div class="armrest left"></div><div class="armrest right"></div>
+                <div class="chair-back"><img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=100"><div class="user-label">Tuấn HP</div></div>
+                <div class="chair-seat"></div>
+                <div class="status-bar status-busy"></div>
+            </div>
+            <div class="vip-chair">
+                <div class="chair-number">5</div>
+                <div class="armrest left"></div><div class="armrest right"></div>
+                <div class="chair-back"><div style="color:#d4af37;font-size:10px;">TRỐNG</div><div class="user-label">Mời vào</div></div>
+                <div class="chair-seat"></div>
+                <div class="status-bar status-available"></div>
+            </div>
+            <div class="vip-chair">
+                <div class="chair-number">6</div>
+                <div class="armrest left"></div><div class="armrest right"></div>
+                <div class="chair-back"><img src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=100"><div class="user-label">Ngọc Trinh</div></div>
+                <div class="chair-seat"></div>
+                <div class="status-bar status-busy"></div>
+            </div>
+            <div class="vip-chair">
+                <div class="chair-number">7</div>
+                <div class="armrest left"></div><div class="armrest right"></div>
+                <div class="chair-back"><div style="color:#d4af37;font-size:10px;">TRỐNG</div><div class="user-label">Mời vào</div></div>
+                <div class="chair-seat"></div>
+                <div class="status-bar status-available"></div>
+            </div>
+            <div class="vip-chair">
+                <div class="armrest left"></div><div class="armrest right"></div>
+                <div class="chair-back"><div style="color:#d4af37; font-weight:900; font-size:14px;">+99</div></div>
+                <div class="chair-seat"></div>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <button class="btn-3d secondary">CHÀO MC</button>
+            <button class="btn-3d primary">BẮT ĐẦU GHÉP ĐÔI</button>
+            <button class="btn-3d secondary">TẶNG QUÀ</button>
+        </div>
+    </div>
+</section>
+</main>
+
+<footer>
+    <div class="logo">HP LOVE <span>AI</span></div>
+    <div class="footer-socials">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-tiktok"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-zalo"></i>
+        <i class="fa-brands fa-telegrams"></i>
+    </div>
+    <p style="opacity: 0.4; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">
+        © 2026 HẸN HÒ & GHÉP ĐÔI OFFICIAL • MADE IN HAI PHONG CITY 
+    </p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    // SỐ NHẢY
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const updateCount = () => {
+            const count = +counter.innerText.replace(/[K+%]/g, '');
+            const inc = target / 80;
+            if (count < target) {
+                counter.innerText = Math.ceil(count + inc) + (target === 99 ? "%" : "K+");
+                setTimeout(updateCount, 30);
+            } else {
+                counter.innerText = target + (target === 99 ? "%" : "K+");
+            }
+        };
+        updateCount();
+    });
+
+    // FAQ TOGGLE
+    function toggleFaq(el) {
+        el.classList.toggle('active');
+        const icon = el.querySelector('.fa-chevron-down');
+        if (icon) icon.style.transform = el.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+    const textTarget = document.getElementById("typing-text");
+const dataText = [
+    "Hẹn hò thật - Người thật",
+    "Kết nối nhanh - Không đợi chờ",
+    "Tìm người yêu chuẩn gu HP",
+    "Trải nghiệm AI đỉnh cao"
+];
+
+let currentText = 0;
+let currentChar = 0;
+let isDeletingText = false;
+
+function startTyping() {
+    const fullText = dataText[currentText];
+    
+    if (isDeletingText) {
+        textTarget.textContent = fullText.substring(0, currentChar - 1);
+        currentChar--;
+    } else {
+        textTarget.textContent = fullText.substring(0, currentChar + 1);
+        currentChar++;
+    }
+
+    let speed = isDeletingText ? 50 : 150;
+
+    if (!isDeletingText && currentChar === fullText.length) {
+        speed = 2000; // Dừng lại xem chữ
+        isDeletingText = true;
+    } else if (isDeletingText && currentChar === 0) {
+        isDeletingText = false;
+        currentText = (currentText + 1) % dataText.length;
+        speed = 500;
+    }
+
+    setTimeout(startTyping, speed);
+}
+
+document.addEventListener("DOMContentLoaded", startTyping);
+
+</script>
+</body>
+</html>
