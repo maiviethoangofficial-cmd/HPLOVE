@@ -1175,6 +1175,7 @@
         updateCount();
     });
 
+            <script>
         // FAQ TOGGLE
         function toggleFaq(el) {
             el.classList.toggle('active');
@@ -1209,27 +1210,27 @@
             let speed = isDeletingText ? 50 : 150;
 
             if (!isDeletingText && currentChar === fullText.length) {
-                speed = 2000; // Dừng lại xem chữ
+                speed = 2000; 
                 isDeletingText = true;
             } else if (isDeletingText && currentChar === 0) {
                 isDeletingText = false;
                 currentText = (currentText + 1) % dataText.length;
                 speed = 500;
             }
-
             setTimeout(startTyping, speed);
         }
 
         document.addEventListener("DOMContentLoaded", startTyping);
-    
+    </script>
+
     <div id="music-control" onclick="playMusic()" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; cursor: pointer; background: rgba(255,0,60,0.8); color: white; padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; font-size: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
         <i class="fas fa-music" style="margin-right: 8px;"></i> <span id="music-text">Bật Nhạc</span>
     </div>
 
     <div id="youtube-audio-player" style="display:none;"></div>
 
+    <script>
       var player;
-      // Tải API của YouTube
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -1239,7 +1240,7 @@
         player = new YT.Player('youtube-audio-player', {
           height: '0',
           width: '0',
-          videoId: 'emSFAf_pl_0', // ID video Ngày Hạnh Phúc Remix
+          videoId: 'emSFAf_pl_0', 
           playerVars: {
             'autoplay': 1,
             'loop': 1,
@@ -1257,9 +1258,8 @@
       }
 
       function onPlayerReady(event) {
-        // Thử phát tự động
-        event.target.playVideo();
         event.target.setVolume(100);
+        // Trình duyệt chặn tự động phát có tiếng, nên ta cần click
       }
 
       function onPlayerStateChange(event) {
@@ -1271,13 +1271,13 @@
 
       function playMusic() {
         if (player && player.playVideo) {
-          player.playVideo();
           player.unMute();
           player.setVolume(100);
+          player.playVideo();
         }
       }
 
-      // Tự động phát khi người dùng click bất cứ đâu trên trang web
+      // Kích hoạt nhạc khi người dùng click bất kỳ đâu
       document.body.addEventListener('click', function() {
         playMusic();
       }, { once: true });
