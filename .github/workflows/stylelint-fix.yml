@@ -1,0 +1,33 @@
+name: Auto Stylelint Fix
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  stylelint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install Stylelint
+      run: |
+        npm install stylelint stylelint-config-standard
+
+    - name: Run stylelint auto-fix
+      run: |
+        npx stylelint "**/*.{css,scss}" --fix
+
+    - name: Commit & Push
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add .
+        git commit -m "Auto stylelint fixes" || echo "No changes"
+        git push
